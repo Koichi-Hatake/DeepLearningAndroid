@@ -1,3 +1,7 @@
+/*
+ * Copyright (C) 2018 Koichi Hatakeyama
+ * All rights reserved.
+ */
 package net.seeeno.deeplearning;
 
 import android.app.Activity;
@@ -14,9 +18,6 @@ import java.io.IOException;
 public class MainActivity extends Activity implements View.OnClickListener {
 
     static {
-        //System.loadLibrary("archive");
-        //System.loadLibrary("nnabla");
-        //System.loadLibrary("nnabla_utils");
         System.loadLibrary("nnabla_android");
     }
 
@@ -36,7 +37,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private void copyAssetsToLocal() {
         try {
             InputStream inputStream = getAssets().open(FILE_NNP);
-            //FileOutputStream fileOutputStream = openFileOutput(mContext.getFilesDir() + "/" + FILE_NNP, MODE_PRIVATE);
             FileOutputStream fileOutputStream  = new FileOutputStream(new File(mContext.getFilesDir() + "/" + FILE_NNP), false);
             byte[] buffer = new byte[1024];
             int length = 0;
@@ -47,7 +47,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
             inputStream.close();
 
             inputStream = getAssets().open(PGM_FILE);
-            //fileOutputStream = openFileOutput(mContext.getFilesDir() + "/" + PGM_FILE, MODE_PRIVATE);
             fileOutputStream  = new FileOutputStream(new File(mContext.getFilesDir() + "/" + PGM_FILE), false);
             buffer = new byte[1024];
             length = 0;
@@ -60,21 +59,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
             e.printStackTrace();
         }
     }
-
-    public MainActivity() {
-        super();
-        //mContext = this.getBaseContext();
-        //mContext = android.content.Context;
-        /*
-        mContext = getApplicationContext();
-        copyAssetsToLocal();
-        nativeInitNeuralNetwork(
-                mContext.getFilesDir() + "/" + FILE_NNP,
-                NETWORK_NAME
-                );
-                */
-    }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,8 +94,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 ((TextView)findViewById(R.id.result)).setText(Integer.toString(index));
                 break;
             case R.id.clear:
-                //((TextView)findViewById(R.id.result)).setText("");
-                ((TextView)findViewById(R.id.result)).setText(stringFromJNI());
+                ((TextView)findViewById(R.id.result)).setText("");
                 ((SurfaceView)findViewById(R.id.surface_view)).clearCanvas();
                 break;
             default:

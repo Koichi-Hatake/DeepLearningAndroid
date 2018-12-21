@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.sonymobile.deeplearning"
+        applicationId "net.seeeno.deeplearning"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1

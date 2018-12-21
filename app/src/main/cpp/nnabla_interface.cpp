@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 K.Hatakeyama
+ * Copyright (C) 2018 Koichi Hatakeyama
  * All rights reserved.
  */
 
@@ -65,14 +65,12 @@ Java_net_seeeno_deeplearning_MainActivity_nativePredict(
     jfloatArray result;
 
     const char *pgm_path = env->GetStringUTFChars(pgmPath, 0);
-
     //jfloat *data = env->GetFloatArrayElements(pgmData, 0);
     //jsize  len = env->GetArrayLength(pgmData);
     result = env->NewFloatArray(10);
 
-    //const float *predict_array = snn.predict(&data[0], pgm_path, len);
-    const float *predict_array = snn.predict(NULL, pgm_path, 0);
-    //env->ReleaseFloatArrayElements(pgmData, data, 0);
+    const float *predict_array = snn.predict(pgm_path);
     env->SetFloatArrayRegion(result, 0, 10, predict_array);
+
     return result;
 }

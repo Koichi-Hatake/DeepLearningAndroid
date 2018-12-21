@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 K.Hatakeyama
+ * Copyright (C) 2018 Koichi Hatakeyama
  * All rights reserved.
  */
 
@@ -85,7 +85,7 @@ public:
         return true;
     }
 
-    const float *predict(const float *in, const char *pgmPath, jsize len) {
+    const float *predict(const char *pgmPath) {
 
         // Get input data as a CPU array.
         nbla::CgVariablePtr x = mExecutor->get_data_variables().at(0).variable;
@@ -97,10 +97,9 @@ public:
         mExecutor->execute();
         nbla::CgVariablePtr y = mExecutor->get_output_variables().at(0).variable;
         const float *y_data = y->variable()->get_data_pointer<float>(mContext);
-        //float *r_data = y_data;
+
         return y_data;
     }
 };
-
 
 #endif //DEEPLEARNING_NNABLA_INTERFACE_H
