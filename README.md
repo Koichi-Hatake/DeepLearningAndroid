@@ -1,11 +1,8 @@
 # DeepLearningAndroid
-Overview is here.
+This is a sample Android application that uses Neural Network Libraries(https://nnabla.org/).
+This is to predict handwritten input of numbers by learning result of MNIST.
+
 ## Description
-*Test*
-`$hoge = 1`
-* List0
-* List1
-* List2
 
 ## Demo
 
@@ -19,4 +16,4 @@ Overview is here.
 This software includes the work that is distributed in the Apache License 2.0
 
 ## Author
-[Koichi-Hatake] (https://github.com/xxx)
+[Koichi-Hatake] (https://github.com/DeepLearningAndroid)
