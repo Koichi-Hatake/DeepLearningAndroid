@@ -11,7 +11,19 @@ add_library( # Specifies the name of the library.
              # Provides a relative path to your source file(s).
              app/src/main/cpp/nnabla_interface.cpp )
 
+find_library( # Defines the name of the path variable that stores the
+        # location of the NDK library.
+        log-lib
+
+        # Specifies the name of the NDK library that
+        # CMake needs to locate.
+        log )
+
 include_directories(app/src/main/cpp/include)
-target_link_libraries(nnabla_android nnabla nnabla_utils)
+target_link_libraries(
+        nnabla_android nnabla nnabla_utils
+
+        # Links the log library to the target library.
+        ${log-lib} )
 
 set_property(TARGET nnabla_android PROPERTY CXX_STANDARD 11)
