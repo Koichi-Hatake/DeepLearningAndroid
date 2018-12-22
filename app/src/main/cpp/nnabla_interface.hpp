@@ -89,8 +89,7 @@ public:
         nbla::CgVariablePtr x = mExecutor->get_data_variables().at(0).variable;
         uint8_t *data = x->variable()->cast_data_and_get_pointer<uint8_t>(mContext);
 
-        // Read input pgm file and store image data into the CPU array.
-        // read_pgm_mnist(pgmPath, data);
+        // Copy pgm data array to input buffer.
         for (int i=0; i < len; i++) {
             data[i] = (uint8_t)pgm_data[i];
         }

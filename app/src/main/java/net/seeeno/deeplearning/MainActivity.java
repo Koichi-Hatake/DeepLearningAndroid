@@ -25,7 +25,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     private native void nativeInitNeuralNetwork(String nppPath, String networkName);
     private native float[] nativePredict(int[] imageData);
-    //private native float[] nativePredict(String pgm_path);
 
     private android.content.Context mContext;
     //private final static String FILE_NNP = "lenet_010000.nnp";
@@ -35,7 +34,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private void copyAssetsToLocal() {
         try {
             InputStream inputStream = getAssets().open(FILE_NNP);
-            FileOutputStream fileOutputStream  = new FileOutputStream(new File(mContext.getFilesDir() + "/" + FILE_NNP), false);
+            File nnpFile = new File(mContext.getFilesDir() + "/" + FILE_NNP);
+            FileOutputStream fileOutputStream  = new FileOutputStream(nnpFile, false);
             byte[] buffer = new byte[1024];
             int length = 0;
             while ((length = inputStream.read(buffer)) >= 0) {
@@ -43,17 +43,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
             }
             fileOutputStream.close();
             inputStream.close();
-            /*
-            inputStream = getAssets().open(PGM_FILE);
-            fileOutputStream  = new FileOutputStream(new File(mContext.getFilesDir() + "/" + PGM_FILE), false);
-            buffer = new byte[1024];
-            length = 0;
-            while ((length = inputStream.read(buffer)) >= 0) {
-                fileOutputStream.write(buffer, 0, length);
-            }
-            fileOutputStream.close();
-            inputStream.close();
-            */
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -81,7 +70,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         switch (v.getId()) {
             case R.id.analyze:
-                // TODO
                 int[] pgmArray = view.getPgmArray();
                 float predictArray[] = nativePredict(pgmArray);
                 int index = 0;
@@ -93,7 +81,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
                         index = i;
                     }
                 }
-
                 ((TextView)findViewById(R.id.result)).setText(Integer.toString(index));
                 break;
             case R.id.clear:

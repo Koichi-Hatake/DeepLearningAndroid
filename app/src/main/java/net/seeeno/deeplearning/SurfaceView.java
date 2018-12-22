@@ -72,25 +72,16 @@ public class SurfaceView extends android.view.SurfaceView implements Callback {
         for(int i=0; i < PGM_HEIGHT; i++) {
             for(int j=0; j < PGM_WIDTH; j++) {
                 int pixel = resizeBitmap.getPixel(j, i);
-                //int red = Color.red(pixel);
-                //int green = Color.green(pixel);
-                //int blue = Color.blue(pixel);
                 int alpha = Color.alpha(pixel);
-                //int average = (red + green + blue) / 3;
-                //int gray_rgb = Color.rgb(alpha, alpha, alpha);
                 int gray_rgb = Color.argb(0xFF, alpha, alpha, alpha);
                 resizeBitmap.setPixel(j, i, gray_rgb);
-
-                // TODO
-                //int index = i*PGM_WIDTH + j;
-                //int index = i + j*PGM_HEIGHT;
                 int index = j + i*PGM_WIDTH;
                 //Log.v(TAG, "Location " + j + ":" + i + "->" + index + " 0x"+  Integer.toHexString(pixel) + "-> 0x" + Integer.toHexString(alpha));
                 grayArray[index] = alpha;
             }
         }
 
-        // DEBUG
+        // Show converted image
         Canvas canvas = mHolder.lockCanvas();
         canvas.drawColor(0, Mode.CLEAR);
         android.graphics.Rect src = new android.graphics.Rect(0, 0, PGM_WIDTH, PGM_HEIGHT);
