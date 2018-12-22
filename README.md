@@ -4,6 +4,9 @@ This is to predict handwritten input of numbers by learning result of MNIST.
 
 ## Description
 
+## Neural Network
+![mnist_network_00](https://user-images.githubusercontent.com/45664722/50375474-2c74be00-0641-11e9-8422-3ac6868d7cfa.png)
+
 ## Demo
 
 ## Requirement
