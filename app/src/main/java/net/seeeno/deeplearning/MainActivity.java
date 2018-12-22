@@ -23,16 +23,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     private static final String TAG = "MainActivity";
 
-    private native String stringFromJNI();
     private native void nativeInitNeuralNetwork(String nppPath, String networkName);
-    //private native float[] nativePredict(float imageData[]);
-    private native float[] nativePredict(String pgm_path);
+    private native float[] nativePredict(int[] imageData);
+    //private native float[] nativePredict(String pgm_path);
 
     private android.content.Context mContext;
     //private final static String FILE_NNP = "lenet_010000.nnp";
     private final static String FILE_NNP = "mnist0_9_result_train.nnp";
     private final static String NETWORK_NAME = "Executor";
-    private final static String PGM_FILE = "5.pgm";
 
     private void copyAssetsToLocal() {
         try {
@@ -45,7 +43,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             }
             fileOutputStream.close();
             inputStream.close();
-
+            /*
             inputStream = getAssets().open(PGM_FILE);
             fileOutputStream  = new FileOutputStream(new File(mContext.getFilesDir() + "/" + PGM_FILE), false);
             buffer = new byte[1024];
@@ -55,6 +53,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
             }
             fileOutputStream.close();
             inputStream.close();
+            */
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -77,10 +76,14 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+
+        SurfaceView view = ((SurfaceView)findViewById(R.id.surface_view));
+
         switch (v.getId()) {
             case R.id.analyze:
                 // TODO
-                float predictArray[] = nativePredict(mContext.getFilesDir() + "/" + PGM_FILE);
+                int[] pgmArray = view.getPgmArray();
+                float predictArray[] = nativePredict(pgmArray);
                 int index = 0;
                 float score = 0;
                 for(int i=0; i < predictArray.length; i++) {
@@ -95,7 +98,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 break;
             case R.id.clear:
                 ((TextView)findViewById(R.id.result)).setText("");
-                ((SurfaceView)findViewById(R.id.surface_view)).clearCanvas();
+                view.clearCanvas();
                 break;
             default:
                 break;

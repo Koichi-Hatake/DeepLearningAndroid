@@ -10,11 +10,14 @@ import android.graphics.Path;
 import android.graphics.PixelFormat;
 import android.graphics.PorterDuff.Mode;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceHolder.Callback;
 
 public class SurfaceView extends android.view.SurfaceView implements Callback {
+
+    private static final String TAG = "SurfaceView";
 
     private SurfaceHolder mHolder;
 
@@ -25,6 +28,9 @@ public class SurfaceView extends android.view.SurfaceView implements Callback {
     private Bitmap mLastDrawBitmap;
 
     private Canvas mLastDrawCanvas;
+
+    static final private int PGM_WIDTH = 28;
+    static final private int PGM_HEIGHT = 28;
 
     public SurfaceView(Context context) {
         super(context);
@@ -49,7 +55,50 @@ public class SurfaceView extends android.view.SurfaceView implements Callback {
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeCap(Paint.Cap.ROUND);
         mPaint.setAntiAlias(true);
-        mPaint.setStrokeWidth(12);
+        mPaint.setStrokeWidth(24);
+    }
+
+    /** */
+    public int[] getPgmArray() {
+
+        // Rescale
+        Log.v(TAG, "Original Size: " + mLastDrawBitmap.getWidth() + ":" + mLastDrawBitmap.getHeight());
+        Bitmap resizeBitmap = Bitmap.createScaledBitmap(mLastDrawBitmap,
+                PGM_WIDTH, PGM_HEIGHT,true);
+
+        // Gray scale
+        Log.v(TAG, "Size: " + resizeBitmap.getWidth() + ":" + resizeBitmap.getHeight());
+        int[] grayArray = new int[PGM_WIDTH * PGM_HEIGHT];
+        for(int i=0; i < PGM_HEIGHT; i++) {
+            for(int j=0; j < PGM_WIDTH; j++) {
+                int pixel = resizeBitmap.getPixel(j, i);
+                //int red = Color.red(pixel);
+                //int green = Color.green(pixel);
+                //int blue = Color.blue(pixel);
+                int alpha = Color.alpha(pixel);
+                //int average = (red + green + blue) / 3;
+                //int gray_rgb = Color.rgb(alpha, alpha, alpha);
+                int gray_rgb = Color.argb(0xFF, alpha, alpha, alpha);
+                resizeBitmap.setPixel(j, i, gray_rgb);
+
+                // TODO
+                //int index = i*PGM_WIDTH + j;
+                //int index = i + j*PGM_HEIGHT;
+                int index = j + i*PGM_WIDTH;
+                //Log.v(TAG, "Location " + j + ":" + i + "->" + index + " 0x"+  Integer.toHexString(pixel) + "-> 0x" + Integer.toHexString(alpha));
+                grayArray[index] = alpha;
+            }
+        }
+
+        // DEBUG
+        Canvas canvas = mHolder.lockCanvas();
+        canvas.drawColor(0, Mode.CLEAR);
+        android.graphics.Rect src = new android.graphics.Rect(0, 0, PGM_WIDTH, PGM_HEIGHT);
+        android.graphics.Rect dst = new android.graphics.Rect(0, 0, mLastDrawBitmap.getWidth(), mLastDrawBitmap.getHeight());
+        canvas.drawBitmap(resizeBitmap, src, dst,null);
+        mHolder.unlockCanvasAndPost(canvas);
+
+        return grayArray;
     }
 
     @Override

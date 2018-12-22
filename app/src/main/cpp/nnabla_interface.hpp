@@ -80,19 +80,20 @@ public:
         mNnp->add(nnp_file);
         mExecutor = mNnp->get_executor(network_name);
         mExecutor->set_batch_size(1);
-        //mPgmFile = pgm_file;
 
         return true;
     }
 
-    const float *predict(const char *pgmPath) {
+    const float *predict(const int *pgm_data, const int len) {
 
-        // Get input data as a CPU array.
         nbla::CgVariablePtr x = mExecutor->get_data_variables().at(0).variable;
         uint8_t *data = x->variable()->cast_data_and_get_pointer<uint8_t>(mContext);
 
         // Read input pgm file and store image data into the CPU array.
-        read_pgm_mnist(pgmPath, data);
+        // read_pgm_mnist(pgmPath, data);
+        for (int i=0; i < len; i++) {
+            data[i] = (uint8_t)pgm_data[i];
+        }
 
         mExecutor->execute();
         nbla::CgVariablePtr y = mExecutor->get_output_variables().at(0).variable;

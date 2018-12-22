@@ -33,17 +33,15 @@ extern "C" JNIEXPORT const jfloatArray JNICALL
 Java_net_seeeno_deeplearning_MainActivity_nativePredict(
         JNIEnv *env,
         jobject obj,
-        jstring pgmPath /*,
-        jfloatArray pgmData*/
+        jintArray pgmData
         ) {
-    jfloatArray result;
 
-    const char *pgm_path = env->GetStringUTFChars(pgmPath, 0);
-    //jfloat *data = env->GetFloatArrayElements(pgmData, 0);
-    //jsize  len = env->GetArrayLength(pgmData);
+    jfloatArray result;
+    const int *pgm_data = env->GetIntArrayElements(pgmData, 0);
+    jsize len = env->GetArrayLength(pgmData);
     result = env->NewFloatArray(10);
 
-    const float *predict_array = snn.predict(pgm_path);
+    const float *predict_array = snn.predict(pgm_data, len);
     env->SetFloatArrayRegion(result, 0, 10, predict_array);
 
     return result;
