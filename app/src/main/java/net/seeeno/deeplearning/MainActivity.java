@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.io.FileOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 
@@ -82,9 +83,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     }
                 }
                 ((TextView)findViewById(R.id.result)).setText(Integer.toString(index));
+                DecimalFormat precisionForm = new DecimalFormat("##0.00%");
+                ((TextView)findViewById(R.id.precisionText)).setText(precisionForm.format(predictArray[index]));
                 break;
             case R.id.clear:
                 ((TextView)findViewById(R.id.result)).setText("");
+                ((TextView)findViewById(R.id.precisionText)).setText("");
                 view.clearCanvas();
                 break;
             default:

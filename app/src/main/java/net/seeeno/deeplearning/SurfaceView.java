@@ -1,3 +1,7 @@
+/*
+ * Copyright (C) 2018 Koichi Hatakeyama
+ * All rights reserved.
+ */
 package net.seeeno.deeplearning;
 
 import android.content.Context;
@@ -31,6 +35,7 @@ public class SurfaceView extends android.view.SurfaceView implements Callback {
 
     static final private int PGM_WIDTH = 28;
     static final private int PGM_HEIGHT = 28;
+    static final private int LINE_WIDTH = 28;
 
     public SurfaceView(Context context) {
         super(context);
@@ -55,7 +60,7 @@ public class SurfaceView extends android.view.SurfaceView implements Callback {
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setStrokeCap(Paint.Cap.ROUND);
         mPaint.setAntiAlias(true);
-        mPaint.setStrokeWidth(24);
+        mPaint.setStrokeWidth(LINE_WIDTH);
     }
 
     /** */

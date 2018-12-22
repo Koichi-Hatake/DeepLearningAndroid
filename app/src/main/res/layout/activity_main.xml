@@ -62,4 +62,17 @@
 
     </RelativeLayout>
 
+    <EditText
+        android:id="@+id/precisionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="106dp"
+        android:editable="false"
+        android:ems="10"
+        android:gravity="center_vertical|center_horizontal"
+        android:inputType="none|textPersonName"
+        android:textSize="30sp" />
+
 </RelativeLayout>
