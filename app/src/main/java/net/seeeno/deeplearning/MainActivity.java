@@ -65,6 +65,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+    }
+
+    @Override
     public void onClick(View v) {
 
         SurfaceView view = ((SurfaceView)findViewById(R.id.surface_view));

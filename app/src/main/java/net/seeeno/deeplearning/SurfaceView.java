@@ -33,8 +33,11 @@ public class SurfaceView extends android.view.SurfaceView implements Callback {
 
     private Canvas mLastDrawCanvas;
 
+    /** */
     static final private int PGM_WIDTH = 28;
     static final private int PGM_HEIGHT = 28;
+
+    /** */
     static final private int LINE_WIDTH = 28;
 
     public SurfaceView(Context context) {
@@ -108,7 +111,9 @@ public class SurfaceView extends android.view.SurfaceView implements Callback {
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-        mLastDrawBitmap.recycle();
+        // TODO -- Calling recyle() in this timing will cause "java.lang.RuntimeException: Canvas".
+        // It might need to call any api to free bitmap resources.
+        //mLastDrawBitmap.recycle();
     }
 
     public void clearCanvas() {

@@ -96,7 +96,7 @@ public:
         // Copy pgm data array to input buffer.
         for (int i=0; i < len; i++) {
             data[i] = (uint8_t)pgm_data[i];
-            __android_log_print(ANDROID_LOG_VERBOSE, TAG, "%d: 0x%02x", i, data[i]);
+            //__android_log_print(ANDROID_LOG_VERBOSE, TAG, "%d: 0x%02x", i, data[i]);
         }
 
         mExecutor->execute();
