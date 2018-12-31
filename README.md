@@ -3,6 +3,10 @@ This is a sample Android application that uses Neural Network Libraries(https://
 This is to predict handwritten input of numbers by learning result of MNIST.
 
 ## Description
+This is the easiest sample Android application to learn first step of machine larning by Neural Network Libraries (https://nnabla.org/).
+As in many cases doing so, this application uses MNIST dataset as learning data.
+You can create your own neural network easily by Neural Network Console (https://dl.sony.com/ja/), and can verify the neural network performance in this application.
+In this case, since this application uses handwritten number as input, you may be able to find weaknesses in your network.
 
 ## Screen shot
 (1). ![1st_step](https://user-images.githubusercontent.com/45664722/50549678-7e05f400-0ca4-11e9-9d5e-758395e79d51.png)  (2). ![2nd_step](https://user-images.githubusercontent.com/45664722/50549681-83633e80-0ca4-11e9-9c29-9553d95774d6.png)
@@ -36,10 +40,21 @@ Sample network file.
 1. Please rebuild and run!
 
 ## Requirement
-
-## Usage
-
+- Android studio
+- C++ utility libraries using Android NDK  
+  This git includes pre build libraries, therefore you don't need to build these libraries.  
+  If you want to build your own libraries, please refer the site below.  
+  https://github.com/sony/nnabla/blob/master/doc/build/build_android.md
+  
 ## Install
+1. Download  
+   ```$ git clone https://github.com/Koichi-Hatake/DeepLearningAndroid ```  
+1. Build  
+   Please import by Android Studio.  
+   ```File -> Open -> Open File or Project```  
+1. Run  
+   Run the application.  
+   ```Run 'app' ```
 
 ## License
 This software includes the work that is distributed in the Apache License 2.0
