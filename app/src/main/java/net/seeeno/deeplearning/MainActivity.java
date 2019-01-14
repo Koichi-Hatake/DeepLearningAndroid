@@ -30,6 +30,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private android.content.Context mContext;
     //private final static String FILE_NNP = "lenet_010000.nnp";
     private final static String FILE_NNP = "mnist0_9_result_train.nnp";
+    //private final static String FILE_NNP = "mnist0_9_result_train2.nnp";
     private final static String NETWORK_NAME = "Executor";
 
     private void copyAssetsToLocal() {
