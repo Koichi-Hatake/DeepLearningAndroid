@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.4.1)
 link_directories(app/src/main/jniLibs/arm64-v8a)
-set(PROJECT_SOURCE_DIR C:/Project/DeepLearning/App/DeepLearning)
 
 add_library( # Specifies the name of the library.
              nnabla_android
